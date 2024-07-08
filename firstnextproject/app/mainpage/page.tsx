@@ -1,10 +1,11 @@
 import React from 'react'
+import MainPageComponent from '../components/mainpage-components/mainpage'
 
 
 export default function MainPage() {
   return (
     <div>
-      Mainpage
+      <MainPageComponent />
     </div>
   )
 }

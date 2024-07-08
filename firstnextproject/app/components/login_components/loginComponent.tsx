@@ -17,11 +17,8 @@ export default function LoginComponent() {
                 <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type='password' placeholder='Enter password'></input>
             </div>
 
-            <div className="flex items-center justify-between">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Sign In</button>
-                <Link href={'/register'}>
-                    Register here
-                </Link>
+            <div className="flex items-center justify-center">
+                <button className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Sign In</button>
             </div>
         </form>
     </div>

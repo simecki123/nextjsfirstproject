@@ -1,11 +1,21 @@
-import React from 'react'
-import MainPageComponent from '../components/mainpage-components/mainpage'
-
+import React from 'react';
+import MainPageComponent from '../components/mainpage-components/mainpage';
+import BrewCoffeeComponent from '../components/mainpage-components/brew-coffee-components';
 
 export default function MainPage() {
   return (
     <div>
-      <MainPageComponent />
+      <MainPageComponent /> {/* This component acts as a header */}
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        {/* Centering the BrewCoffeeComponent */}
+        <div className="flex items-center justify-center mt-4">
+          <div className="shadow hover:shadow-lg transform hover:scale-105
+          p-4 bg-white transition duration-300 rounded-2xl cursor-pointer mb-96">
+            <BrewCoffeeComponent />
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
+

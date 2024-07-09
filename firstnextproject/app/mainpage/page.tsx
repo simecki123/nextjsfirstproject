@@ -4,6 +4,7 @@ import MainPageComponent from '../components/mainpage-components/mainpage';
 import BrewCoffeeComponent from '../components/mainpage-components/brew-coffee-components';
 import { useRouter } from 'next/navigation';
 import AcceptCoffeComponent from '../components/AcceptCoffeComponents/AcceptCoffeComponent';
+import CurentlyBrewingComponent from '../components/CurentlyBrewingComponent/CurentlyBrewingComponent';
 
 export default function MainPage() {
 
@@ -21,7 +22,7 @@ export default function MainPage() {
             <BrewCoffeeComponent />
           </div>
         </div>
-        <AcceptCoffeComponent />
+        <CurentlyBrewingComponent />
       </div>
     </div>
   );

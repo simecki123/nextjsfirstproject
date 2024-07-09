@@ -1,10 +1,29 @@
 "use client"
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 export default function ToolbarComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+  const menuRef = useRef(null);
+  const settingsRef = useRef(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setIsMenuOpen(false);
+    }
+    if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+      setIsSettingsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="w-full bg-gray-800 text-white shadow-lg">
@@ -25,8 +44,8 @@ export default function ToolbarComponent() {
             </div>
           </button>
           {isMenuOpen && (
-            <div className="relative-group absolute top-16 left-4 bg-white text-gray-800 rounded shadow-lg py-2 w-40">
-              <Link href="/logout">
+            <div ref={menuRef} className="absolute top-16 left-4 bg-white text-gray-800 rounded shadow-lg py-2 w-40">
+              <Link href="/login">
                 <p className="block px-4 py-2 hover:bg-gray-200">Log out</p>
               </Link>
               <Link href="/mainpage">
@@ -45,7 +64,7 @@ export default function ToolbarComponent() {
               ⚙️
             </button>
             {isSettingsOpen && (
-              <div className="absolute right-0 mt-2 bg-white text-gray-800 rounded shadow-lg py-2 w-32">
+              <div ref={settingsRef} className="absolute right-0 mt-2 bg-white text-gray-800 rounded shadow-lg py-2 w-32">
                 <span className="block px-4 py-2 hover:bg-gray-200 cursor-pointer">Light</span>
                 <span className="block px-4 py-2 hover:bg-gray-200 cursor-pointer">Dark</span>
               </div>

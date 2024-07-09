@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState } from 'react';
 import ToolbarComponent from '../headerComponent';
@@ -60,47 +60,47 @@ export default function UserListComponent() {
 
     return (
         <>
-            
-            <div className=''>
-                <div className=''>
-                    <label htmlFor="coffe" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
-                    <select id="coffe" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-64" onChange={handleOptionClick}>
-                        <option value="">Choose an option</option>
-                        <option value="cofyNum">Number of coffee</option>
-                        <option value="rating">Rating</option>
-                    </select>
-                </div>
-                <div className=''>
-                    <table className="min-w-full divide-y divide-gray-200">
-                        <thead className="bg-gray-50">
-                            <tr>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Number of Coffee</th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rating</th>
-                            </tr>
-                        </thead>
-                        <tbody className="bg-white divide-y divide-gray-200">
-                            {userList.map((user, index) => (
-                                <tr key={index}>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        {user.firstName}
-                                        {(topCoffeUser === user || topRatingUser === user) && <img src={trophyImage.src} alt="trophy" className="inline-block h-8 w-8 ml-1" />}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.lastName}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <div className="flex items-center">
-                                            <span>{user.coffeNumber}</span>
-                                            <img src={coffeImage.src} alt="coffee" className="inline-block h-8 w-8 ml-1" />
-                                        </div>
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.score}</td>
+                <div className='bg-white bg-opacity-60 shadow-lg rounded-lg p-6 max-w-2xl w-full'>
+                    <div className='mb-4'>
+                        <label htmlFor="coffe" className="block mb-2 text-sm font-medium text-gray-900">Select an option</label>
+                        <select id="coffe" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 w-64" onChange={handleOptionClick}>
+                            <option value="">Choose an option</option>
+                            <option value="cofyNum">Number of coffee</option>
+                            <option value="rating">Rating</option>
+                        </select>
+                    </div>
+                    <div>
+                        <table className="min-w-full divide-y divide-gray-200">
+                            <thead className="bg-gray-50">
+                                <tr>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Number of Coffee</th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rating</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody className="bg-white divide-y divide-gray-200">
+                                {userList.map((user, index) => (
+                                    <tr key={index} className="hover:bg-gray-100">
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            {user.firstName}
+                                            {(topCoffeUser === user || topRatingUser === user) && <img src={trophyImage.src} alt="trophy" className="inline-block h-8 w-8 ml-1" />}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.lastName}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <div className="flex items-center">
+                                                <span>{user.coffeNumber}</span>
+                                                <img src={coffeImage.src} alt="coffee" className="inline-block h-8 w-8 ml-1" />
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.score}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            
         </>
     );
 }

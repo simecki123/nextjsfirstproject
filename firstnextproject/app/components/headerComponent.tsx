@@ -53,8 +53,9 @@ export default function ToolbarComponent() {
               </Link>
             </div>
           )}
-          <img src="https://via.placeholder.com/40" alt="User Avatar" className="rounded-full w-10 h-10" />
+          <img src="profile_picture.png" alt="User Avatar" className="rounded-full w-10 h-10" />
           <h1 className="text-xl font-bold">Name and Surname</h1>
+
         </div>
 
         <div className="flex items-center space-x-4">
@@ -69,7 +70,7 @@ export default function ToolbarComponent() {
               </div>
             )}
           </div>
-          <img src="https://via.placeholder.com/40" alt="User Avatar" className="rounded-full w-10 h-10" />
+          <img src="profile_picture.png" alt="User Avatar" className="rounded-full w-10 h-10" />
         </div>
       </div>
       <hr className="border-gray-700" />

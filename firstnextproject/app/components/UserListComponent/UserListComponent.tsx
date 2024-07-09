@@ -60,7 +60,7 @@ export default function UserListComponent() {
 
     return (
         <>
-            <ToolbarComponent />
+            
             <div className=''>
                 <div className=''>
                     <label htmlFor="coffe" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>

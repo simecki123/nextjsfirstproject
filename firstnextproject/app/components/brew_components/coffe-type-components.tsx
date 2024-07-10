@@ -40,7 +40,7 @@ export default function CoffeeTypeComponent() {
         <div className="flex flex-col justify-between">
           <img src="/coffeImage.png" width={50} height={30} className="ml-6 pb-3"></img>
           <img src="/sugar-cube.png" width={50} height={30} className="ml-6 mb-5 mt-3"></img>
-          <img src="/milk-carton.png" width={50} height={30} className="ml-6"></img>
+          <img src="/milk-carton.png" width={50} height={30} className="ml-6 mb-2"></img>
         </div>
 
       </div>
@@ -58,13 +58,6 @@ interface AmountProp {
   isSelected: boolean,
   onSelect: (value: number) => void,
 }
-
-// function SugarButton({ value, isSelected, onSelect }: AmountProp) {
-//   return (
-//     <button className="rounded-xl w-8 h-8 flex items-center justify-center cursor-pointer bg-blue-400
-//       m-1 hover:scale-105 transform transition hover:bg-blue-500 shadow-xl">{value}</button>
-//   )
-// }
 
 function SugarButton({ value, isSelected, onSelect }: AmountProp) {
   return (
@@ -87,19 +80,6 @@ function MilkButton({ value, isSelected, onSelect }: AmountProp) {
           ${isSelected ? 'bg-purple-500 text-white' : 'bg-purple-400 hover:bg-purple-500'}
         `}
       onClick={() => onSelect(value)}>{value}</button>
-  )
-}
-
-function TimeButton({ time, isSelected, onSelect }: TimeButtonProps) {
-  return (
-    <div
-      className={`w-16 h-16 flex items-center justify-center rounded cursor-pointer
-        hover:shadow-lg transform hover:scale-105 transition-all
-        ${isSelected ? 'bg-green-400 text-white' : 'bg-green-300 hover:bg-green-400'}`}
-      onClick={() => onSelect(time)}
-    >
-      <span>{time}</span>
-    </div>
   )
 }
 

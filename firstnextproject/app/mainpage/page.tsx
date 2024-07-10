@@ -17,12 +17,13 @@ export default function MainPage() {
         {/* Centering the BrewCoffeeComponent */}
         <div className="flex items-center justify-center mt-4">
           <div className="shadow hover:shadow-lg transform hover:scale-105
-          p-4 bg-white transition duration-300 rounded-2xl cursor-pointer mb-96"
+          p-4 bg-stone-300 transition duration-300 rounded-2xl cursor-pointer mb-96"
             onClick={() => { router.push('/mainpage/brew') }}>
             <BrewCoffeeComponent />
           </div>
         </div>
         <CurentlyBrewingComponent />
+        <AcceptCoffeComponent />
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 import CoffeeTypeComponent from '@/app/components/brew_components/coffe-type-components';
 import RateCoffee from '@/app/components/rating_components/rate-component';
 import { useState } from 'react';
+import BrewButton from './brew-button';
 
 export default function Brew() {
 
@@ -22,14 +23,11 @@ export default function Brew() {
             <TimeButton time={15} isSelected={selectedButton === 15} onSelect={setSelectedButton} />
           </div>
           <div className="flex justify-center mt-8">
-            <button className="px-4 py-2 bg-gray-600 text-white rounded
-              hover:bg-black grow hover:scale-105 transition">BREW</button>
+            <BrewButton />
           </div>
         </div>
       </div>
       <div className='block'>
-        <CoffeeTypeComponent />
-        <RateCoffee />
       </div>
     </div>
   );

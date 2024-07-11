@@ -47,7 +47,8 @@ export default function LoginComponent() {
       console.log(response)
       
       const token = response.data.accessToken; // Get the cookie
-      console.log(token)
+      console.log(token);
+      
       
       if (token) {
         console.log("Token is real");

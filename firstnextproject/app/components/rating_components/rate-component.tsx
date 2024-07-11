@@ -5,22 +5,21 @@ import { useState } from "react"
 export default function RateCoffee() {
 
   const [givenStars, setGivenStars] = useState<number | null>(null)
-  // TODO: set the current star selected and then console log stars selected to console
-
   const starsValues = [1, 2, 3, 4, 5];
 
-  const emptyStars = starsValues.map(value => (
-    <EmptyStar key={value} value={value} handleClick={setGivenStars} />
-  ))
+  // const emptyStars = starsValues.map(value => (
+  //   <EmptyStar key={value} value={value} handleClick={setGivenStars} />
+  // ))
 
   const fullStars = givenStars ? starsValues.slice(0, givenStars).map(value => (
     <FullStar key={value} value={value} handleClick={setGivenStars} />
   )) : null
 
-  const empty2 = givenStars ? starsValues.slice(givenStars).map(value => (
+  const emptyStars = givenStars ? starsValues.slice(givenStars).map(value => (
     <EmptyStar key={value} value={value} handleClick={setGivenStars} />
-  )) : null
-
+  )) : starsValues.map(value => (
+    <EmptyStar key={value} value={value} handleClick={setGivenStars} />
+  ))
 
   return (
     <div className="bg-gray-200 rounded-xl py-14 px-14 flex flex-col">
@@ -34,7 +33,7 @@ export default function RateCoffee() {
               {fullStars}
             </div>
             <div className="flex flex-row">
-              {empty2}
+              {emptyStars}
             </div>
           </div>
         ) : emptyStars}

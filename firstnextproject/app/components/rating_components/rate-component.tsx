@@ -52,7 +52,7 @@ interface EmptyStarProp {
   handleClick: (value: number) => void
 }
 
-function EmptyStar({ key, value, handleClick }: EmptyStarProp) {
+function EmptyStar({ value, handleClick }: EmptyStarProp) {
   return (
     <img src="/empty_star.png" width={50} height={30}
       className="mx-1 cursor-pointer hover:scale-105 transition my-6"
@@ -61,7 +61,7 @@ function EmptyStar({ key, value, handleClick }: EmptyStarProp) {
 }
 
 
-function FullStar({ key, value, handleClick }: EmptyStarProp) {
+function FullStar({ value, handleClick }: EmptyStarProp) {
   return (
     <img src="/full_star.png" width={50} height={30}
       className="mx-1 cursor-pointer hover:scale-105 transition my-6"

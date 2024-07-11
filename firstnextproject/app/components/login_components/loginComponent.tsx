@@ -25,7 +25,12 @@ export default function LoginComponent() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+
+    // Check if email or password is empty
+    if (!email || !password) {
+      setError('Please enter both email and password');
+      return;
+    }
 
     try {
       const response = await login({ email, password });
@@ -37,7 +42,7 @@ export default function LoginComponent() {
         localStorage.setItem('user', JSON.stringify(decodedToken));
         router.push('/mainpage');
       } else {
-        setError('Login successful, but no token received');
+        setError('Login failed: No token received');
       }
     } catch (err: any) {
       console.error('Login error:', err);
@@ -69,6 +74,10 @@ export default function LoginComponent() {
             placeholder="Enter password"
           />
         </div>
+
+        {error && (
+          <p className="text-red-500 text-sm mb-4">{error}</p>
+        )}
 
         <div className="flex items-center justify-center">
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">

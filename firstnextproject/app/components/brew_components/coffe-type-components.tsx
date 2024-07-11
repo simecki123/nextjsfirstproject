@@ -23,7 +23,7 @@ export default function CoffeeTypeComponent() {
           <div className="flex flex-row items-center">
             {values.map((valueSugar) => (
               <SugarButton
-                key={valueSugar}
+                key={valueSugar} // Add key prop here
                 value={valueSugar}
                 isSelected={selectedAmountOfSugar === valueSugar}
                 onSelect={setAmountOfSugar}
@@ -34,7 +34,7 @@ export default function CoffeeTypeComponent() {
           <div className="flex flex-row items-center">
             {values.map((valueMilk) => (
               <MilkButton
-                key={valueMilk}
+                key={valueMilk} // Add key prop here
                 value={valueMilk}
                 isSelected={selectedAmountOfMilk === valueMilk}
                 onSelect={setAmountOfMilk}
@@ -66,7 +66,7 @@ interface AmountProp {
 function SugarButton({ value, isSelected, onSelect }: AmountProp) {
   return (
     <button
-      key={value} // Add key prop here
+      key={value} // Ensure key prop is passed to the root JSX element
       className={`rounded-xl w-8 h-8 flex items-center justify-center cursor-pointer 
           m-1 hover:scale-105 transform transition shadow-xl 
           ${isSelected ? 'bg-blue-500 text-white' : 'bg-blue-400 hover:bg-blue-500'}`}
@@ -80,7 +80,7 @@ function SugarButton({ value, isSelected, onSelect }: AmountProp) {
 function MilkButton({ value, isSelected, onSelect }: AmountProp) {
   return (
     <button
-      key={value} // Add key prop here
+      key={value} // Ensure key prop is passed to the root JSX element
       className={`rounded-xl w-8 h-8 flex items-center justify-center cursor-pointer 
           m-1 hover:scale-105 transform transition shadow-xl 
           ${isSelected ? 'bg-purple-500 text-white' : 'bg-purple-400 hover:bg-purple-500'}`}

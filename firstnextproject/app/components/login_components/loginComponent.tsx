@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { login } from '@/app/api/api';
 
@@ -77,7 +77,7 @@ export default function LoginComponent() {
         </div>
       </form>
       <p className="mt-4 text-gray-700">
-        Don't have an account?{' '}
+        Don&apos;t have an account?{' '}
         <Link href="/register" className="text-blue-500 hover:text-blue-700">
           Register here
         </Link>

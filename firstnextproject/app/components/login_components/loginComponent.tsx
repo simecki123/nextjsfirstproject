@@ -21,10 +21,12 @@ export default function LoginComponent() {
   };
 
   
+
+  
   useEffect(() => {
     // Get the input elements
-    const emailInput = document.querySelector('input[type="email"]');
-    const passwordInput = document.querySelector('input[type="password"]');
+    const emailInput = document.querySelector('input[type="email"]') as HTMLInputElement;
+    const passwordInput = document.querySelector('input[type="password"]') as HTMLInputElement;
     
     // Check if they have values and update state
     if (emailInput && emailInput.value) {
@@ -51,6 +53,7 @@ export default function LoginComponent() {
       
       
       if (token) {
+        localStorage.setItem('token', token);
         console.log("Token is real");
         const decodedToken = jwtDecode(token);
         console.log("Decoded token: ", decodedToken)

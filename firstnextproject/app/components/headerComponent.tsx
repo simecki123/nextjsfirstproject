@@ -8,8 +8,8 @@ export default function ToolbarComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [user, setUser] = useState({ firstName: '', lastName: '' });
-  const menuRef = useRef(null);
-  const settingsRef = useRef(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const settingsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
@@ -21,10 +21,10 @@ export default function ToolbarComponent() {
   }, []);
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (menuRef.current && !menuRef.current.contains(event.target) && !event.target.closest('button')) {
+    if (menuRef.current && !menuRef.current.contains(event.target as Node) && !(event.target as HTMLElement).closest('button')) {
       setIsMenuOpen(false);
     }
-    if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+    if (settingsRef.current && !settingsRef.current.contains(event.target as Node)) {
       setIsSettingsOpen(false);
     }
   };

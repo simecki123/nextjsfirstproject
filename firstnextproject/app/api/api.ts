@@ -51,6 +51,7 @@ api.interceptors.response.use(
 
 // Users requests
 export const login = (loginData: any) => api.post('/api/auth/login', loginData);
+export const register = (registerData: any) => api.post('api/auth/register', registerData);
 export const fetchAllUsers = () => api.get('api/users');
 
 export default api;

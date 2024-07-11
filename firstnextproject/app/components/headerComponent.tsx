@@ -69,6 +69,9 @@ export default function ToolbarComponent() {
               <Link href="/mainpage/leaderboard">
                 <p className="block px-4 py-2 hover:bg-gray-200">Leaderboard</p>
               </Link>
+              <Link href="/mainpage/notification">
+                <p className="block px-4 py-2 hover:bg-gray-200">Notifications</p>
+              </Link>
             </div>
           )}
           <img src="/profile_picture.png" alt="User Avatar" className="rounded-full w-10 h-10" />

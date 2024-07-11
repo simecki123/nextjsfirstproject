@@ -1,3 +1,5 @@
+'use client'
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function CoffeeTypeComponent() {
@@ -5,6 +7,8 @@ export default function CoffeeTypeComponent() {
 
   const [selectedAmountOfMilk, setAmountOfMilk] = useState<number | null>(null);
   const [selectedAmountOfSugar, setAmountOfSugar] = useState<number | null>(null);
+
+  const router = useRouter();
 
   return (
     <div className="bg-gray-200 py-4 px-4 rounded-xl">
@@ -51,7 +55,8 @@ export default function CoffeeTypeComponent() {
       </div>
 
       <div className="flex justify-center mt-4">
-        <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Order</button>
+        <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          onClick={() => router.push('/mainpage/rate')}>Order</button>
       </div>
     </div>
   );

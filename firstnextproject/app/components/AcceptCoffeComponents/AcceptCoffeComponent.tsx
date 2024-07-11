@@ -1,7 +1,15 @@
 import React from 'react';
 import coffeIcon from '@/public/coffeImage.png';
+import { useRouter } from 'next/navigation';
 
 export default function AcceptCoffeComponent() {
+
+    const router = useRouter();
+
+    function pushMainpage() {
+        router.push('/mainpage');
+    }
+
     const user = {
         firstName: "Teo",
         lastName: "Jakšić",
@@ -18,10 +26,10 @@ export default function AcceptCoffeComponent() {
             <div className='flex justify-between'>
                 <button className='bg-green-500 text-white py-3 px-5 rounded-lg
                     hover:bg-green-600 transition duration-300 mx-1
-                    hover:scale-105'>✔️</button>
+                    hover:scale-105' onClick={pushMainpage}>✔️</button>
                 <button className='bg-red-500 text-white py-3 px-5 rounded-lg
                     hover:bg-red-600 transition duration-300 mx-1
-                    hover:scale-105'>❌</button>
+                    hover:scale-105' onClick={() => router.push('/mainpage/choose')}>❌</button>
             </div>
         </div>
     );

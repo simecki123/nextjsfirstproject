@@ -14,6 +14,7 @@
     "axios": "^1.7.2",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
+    "mongodb": "^6.8.0",
     "next": "14.2.4",
     "ngx-cookie-service": "^18.0.0",
     "react": "^18",

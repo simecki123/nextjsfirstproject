@@ -10,6 +10,8 @@ const api = axios.create({
 });
 
 
+
+
 // On request from frontend we set token to header
 api.interceptors.request.use(
   (config) => {
@@ -53,5 +55,10 @@ api.interceptors.response.use(
 export const login = (loginData: any) => api.post('/api/auth/login', loginData);
 export const register = (registerData: any) => api.post('api/auth/register', registerData);
 export const fetchAllUsers = () => api.get('api/users');
+
+// Orders
+export const getUserOrders = (userId: any) => api.get(`/api/users/orders/${userId}`);
+export const giveOrderRating = (orderDataUpdate: any) => api.patch(`/api/orders/edit`, orderDataUpdate, )
+  
 
 export default api;

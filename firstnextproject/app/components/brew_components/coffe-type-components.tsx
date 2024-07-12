@@ -1,8 +1,12 @@
 'use client'
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function CoffeeTypeComponent() {
+
+  const params = useParams();
+  const eventId = params.choose;
+
   const values = [0, 1, 2, 3, 4, 5];
 
   const [selectedAmountOfMilk, setAmountOfMilk] = useState<number | null>(null);

@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import coffeIcon from '@/public/coffeImage.png';
 import { useRouter } from 'next/navigation';

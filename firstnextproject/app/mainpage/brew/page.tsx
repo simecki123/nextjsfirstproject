@@ -1,12 +1,13 @@
 'use client'
-import CoffeeTypeComponent from '@/app/components/brew_components/coffe-type-components';
-import RateCoffee from '@/app/components/rating_components/rate-component';
 import { useState } from 'react';
 import BrewButton from './brew-button';
+import TimeButton from './time-button';
 
 export default function Brew() {
 
   const [selectedButton, setSelectedButton] = useState<number | null>(null);
+
+  console.log('lets see selected button value:', selectedButton)
 
   return (
     <div className="flex items-center justify-center h-screen">
@@ -23,7 +24,7 @@ export default function Brew() {
             <TimeButton time={15} isSelected={selectedButton === 15} onSelect={setSelectedButton} />
           </div>
           <div className="flex justify-center mt-8">
-            <BrewButton />
+            <BrewButton eventData={selectedButton} />
           </div>
         </div>
       </div>
@@ -33,21 +34,3 @@ export default function Brew() {
   );
 }
 
-interface TimeButtonProps {
-  time: number,
-  isSelected: boolean;
-  onSelect: (time: number) => void;
-}
-
-function TimeButton({ time, isSelected, onSelect }: TimeButtonProps) {
-  return (
-    <div
-      className={`w-16 h-16 flex items-center justify-center rounded cursor-pointer
-        hover:shadow-lg transform hover:scale-105 transition-all grow mx-2
-        ${isSelected ? 'bg-stone-400 text-white' : 'bg-stone-300 hover:bg-stone-400'}`}
-      onClick={() => onSelect(time)}
-    >
-      <span>{time}</span>
-    </div>
-  )
-}

@@ -5,7 +5,7 @@ import TimeButton from './time-button';
 
 export default function Brew() {
 
-  const [selectedButton, setSelectedButton] = useState<number | null>(null);
+  const [selectedButton, setSelectedButton] = useState<number | null>(5);
 
   console.log('lets see selected button value:', selectedButton)
 

@@ -39,7 +39,7 @@ export default function UserListComponent() {
             console.log('We fetched user...');
 
             const res = await fetchAllUsers();
-            console.log("Response: ", res.data);
+            console.log("Response users: ", res.data);
             setUserList(res.data || []);
         } catch (error) {
             console.error("Error fetching users:", error);

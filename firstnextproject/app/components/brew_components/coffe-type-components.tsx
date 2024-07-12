@@ -1,12 +1,16 @@
 'use client'
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function CoffeeTypeComponent() {
+
+  const params = useParams();
+  const eventId = params.choose;
+
   const values = [0, 1, 2, 3, 4, 5];
 
-  const [selectedAmountOfMilk, setAmountOfMilk] = useState<number | null>(null);
-  const [selectedAmountOfSugar, setAmountOfSugar] = useState<number | null>(null);
+  const [selectedAmountOfMilk, setAmountOfMilk] = useState<number | null>(0);
+  const [selectedAmountOfSugar, setAmountOfSugar] = useState<number | null>(0);
 
   const router = useRouter();
 
@@ -15,8 +19,8 @@ export default function CoffeeTypeComponent() {
       <div className="flex flex-row">
         <div className="flex flex-col justify-around">
           <div className="flex flex-row items-center">
-            <select className="bg-gray-50 border border-gray-300 text-gray-900
-        text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block
+            <select className="text-xl bg-gray-50 border border-gray-300 text-gray-900
+        rounded-lg focus:ring-blue-500 focus:border-blue-500 block
         w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
         dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <option value="turkish">Turska</option>
@@ -72,9 +76,9 @@ function SugarButton({ value, isSelected, onSelect }: AmountProp) {
   return (
     <button
       key={value} // Ensure key prop is passed to the root JSX element
-      className={`rounded-xl w-8 h-8 flex items-center justify-center cursor-pointer 
+      className={`py-6 px-6 rounded-xl w-8 h-8 flex items-center justify-center cursor-pointer 
           m-1 hover:scale-105 transform transition shadow-xl 
-          ${isSelected ? 'bg-blue-500 text-white' : 'bg-blue-400 hover:bg-blue-500'}`}
+          ${isSelected ? 'text-2xl bg-blue-500 text-white' : 'text-xl bg-blue-400 hover:bg-blue-500'}`}
       onClick={() => onSelect(value)}
     >
       {value}
@@ -86,9 +90,9 @@ function MilkButton({ value, isSelected, onSelect }: AmountProp) {
   return (
     <button
       key={value} // Ensure key prop is passed to the root JSX element
-      className={`rounded-xl w-8 h-8 flex items-center justify-center cursor-pointer 
+      className={`py-6 px-6 rounded-xl w-8 h-8 flex items-center justify-center cursor-pointer 
           m-1 hover:scale-105 transform transition shadow-xl 
-          ${isSelected ? 'bg-purple-500 text-white' : 'bg-purple-400 hover:bg-purple-500'}`}
+          ${isSelected ? 'text-2xl bg-purple-500 text-white' : 'text-xl bg-purple-400 hover:bg-purple-500'}`}
       onClick={() => onSelect(value)}
     >
       {value}

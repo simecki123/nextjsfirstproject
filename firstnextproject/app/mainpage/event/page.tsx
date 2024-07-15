@@ -49,7 +49,7 @@ export default function EventPage() {
   const fetchEventAndOrders = async (userId: string) => {
     try {
       const response = await getUserEventInProgress(userId);
-      
+
       setOrders(response.data.orders);
       setEvent(response.data);
     } catch (err) {
@@ -64,7 +64,7 @@ export default function EventPage() {
       return;
     }
     try {
-      
+
       await patchEventToDone(user.userId);
       console.log("Event updated successfully");
       router.push('/mainpage');
@@ -79,20 +79,32 @@ export default function EventPage() {
   }
 
   return (
-    <div className="flex flex-col h-screen">
-    <div className="bg-stone-200 rounded-xl px-12 py-6 mx-4 my-4">
-      <h1 className="text-6xl font-bold">Orders</h1>
-    </div>
-    <div className="flex-grow overflow-y-auto px-4">
-      <div className="flex flex-col items-center space-y-4 pb-4">
+    //   <div className="p-4">
+    //   </div>
+    // </div>
+    <div className="flex flex-col h-screen items-center justify-center overflow-hidden">
+      <div className="scrollbar scrollbar-thumb-stone-700 scrollbar-track-stone-400
+        w-[40%] h-[80vh] bg-stone-300 mb-4 rounded-xl overflow-y-scroll
+        pt-20 bg-opacity-20">
+        <div className="absolute top-6 left-0 right-0 flex items-center
+          justify-center mt-4">
+          <p className="text-4xl px-4 py-4 bg-stone-700 text-white rounded-xl
+            ">Orders</p>
+        </div>
         {orders.map((order) => (
-          <OrderEvent key={order.coffeeOrderId} order={order} />
+          <div className="flex flex-col w-[100%] items-center justify-center bg-stone-300 bg-opacity-5">
+            <OrderEvent key={order.coffeeOrderId} order={order} />
+          </div>
+        ))}
+        {orders.map((order) => (
+          <div className="flex flex-col w-[100%] items-center justify-center bg-stone-300 bg-opacity-5">
+            <OrderEvent key={order.coffeeOrderId} order={order} />
+          </div>
         ))}
       </div>
+      <div>
+        <EndEventButton handleCoffeeDoneFunction={handleCoffeeDoneFunction} />
+      </div>
     </div>
-    <div className="p-4">
-      <EndEventButton handleCoffeeDoneFunction={handleCoffeeDoneFunction} />
-    </div>
-  </div>
   );
 }

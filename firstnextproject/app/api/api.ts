@@ -62,6 +62,12 @@ export const giveOrderRating = (orderDataUpdate: any) => api.patch(`/api/orders/
 
 // Events
 export const getEventsInProgress = () => api.get(`api/events?status=IN_PROGRESS`);
+
+// get one event
+export const getUserEventInProgress = (userId: any) => api.get(`/api/users/${userId}/brew-events/orders`);
+
+// Patch event to be done
+export const patchEventToDone = (creatorId: any) => api.patch('api/events/complete-event', {creatorId});
   
 
 export default api;

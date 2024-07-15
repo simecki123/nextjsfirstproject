@@ -75,7 +75,22 @@ export default function EventPage() {
   };
 
   if (error) {
-    return <div>Error: {error}</div>;
+    if (error === "Failed to fetch event and orders") {
+      return (
+        <div className="flex items-center justify-center h-screen ">
+          <p className="text-lg text-red-600 font-semibold bg-red-100 p-4 rounded-md border border-red-300 shadow-md">
+            You don't have an event that is in progress
+          </p>
+        </div>
+      );
+    }
+    return (
+      <div className="flex items-center justify-center h-screen ">
+        <p className="text-lg text-red-600 font-semibold bg-red-100 p-4 rounded-md border border-red-300 shadow-md">
+          Error: {error}
+        </p>
+      </div>
+    );
   }
 
   return (

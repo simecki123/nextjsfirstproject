@@ -58,7 +58,10 @@ export const fetchAllUsers = () => api.get('api/users');
 
 // Orders
 export const getUserOrders = (userId: any) => api.get(`/api/users/orders/${userId}`);
-export const giveOrderRating = (orderDataUpdate: any) => api.patch(`/api/orders/edit`, orderDataUpdate, )
+export const giveOrderRating = (orderDataUpdate: any) => api.patch(`/api/orders/edit`, orderDataUpdate );
+
+// Events
+export const getEventsInProgress = () => api.get(`api/events?status=IN_PROGRESS`);
   
 
 export default api;

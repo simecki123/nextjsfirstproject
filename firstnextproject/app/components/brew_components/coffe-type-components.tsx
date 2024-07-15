@@ -14,6 +14,28 @@ export default function CoffeeTypeComponent() {
 
   const router = useRouter();
 
+  function handleClick(): void {
+
+    const url = 'http://46.101.127.179:8080/api/orders/create';
+
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        eventId: `${eventId}`,
+        creatorId: `${JSON.parse(window.localStorage.getItem('user') || '{}').userId}`,
+        type: `TURKISH`,
+        sugarQuantity: selectedAmountOfSugar,
+        milkQuantity: selectedAmountOfMilk,
+      }),
+      headers: {
+        "Authorization": `Bearer ${window.localStorage.getItem('token')}`,
+        "Content-Type": "application/json"
+      }
+    })
+
+    router.push('/mainpage')
+  }
+
   return (
     <div className="bg-gray-200 py-4 px-4 rounded-xl">
       <div className="flex flex-row">
@@ -60,7 +82,7 @@ export default function CoffeeTypeComponent() {
 
       <div className="flex justify-center mt-4">
         <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          onClick={() => router.push('/mainpage/rate')}>Order</button>
+          onClick={handleClick}>Order</button>
       </div>
     </div>
   );

@@ -18,6 +18,16 @@ export default function OrdersPage() {
     // State to hold the list of orders
     const [orderList, setOrderList] = useState<OrderList[]>([]);
 
+    if(orderList.length === 0) {
+        return(
+            <div className='flex items-center justify-center h-screen'>
+              <p className='text-lg text-red-600 font-semibold bg-red-100 p-4 rounded-md border border-red-300 shadow-md'>
+                You dont have any saved orders, try to refresh the page
+              </p>
+            </div>
+          );
+    }
+
     // Fetch orders when the component mounts
     useEffect(() => {
         async function fetchOrders() {

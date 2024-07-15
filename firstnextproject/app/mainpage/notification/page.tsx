@@ -90,6 +90,15 @@ export default function Brew() {
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
+  if(currentEvents.length === 0) {
+    return(
+      <div className='flex items-center justify-center h-screen'>
+        <p className='text-lg text-red-600 font-semibold bg-red-100 p-4 rounded-md border border-red-300 shadow-md'>
+          You dont have any notifications, try to refresh the page
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-center justify-center h-screen">

@@ -22,7 +22,7 @@ export default function CoffeeTypeComponent() {
       method: "POST",
       body: JSON.stringify({
         eventId: `${eventId}`,
-        creatorId: `${JSON.parse(window.localStorage.getItem('user') || '{}').userId}`,
+        userId: `${JSON.parse(window.localStorage.getItem('user') || '{}').userId}`,
         type: `TURKISH`,
         sugarQuantity: selectedAmountOfSugar,
         milkQuantity: selectedAmountOfMilk,

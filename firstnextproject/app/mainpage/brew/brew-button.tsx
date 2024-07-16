@@ -1,4 +1,5 @@
 'use client'
+import { createEvent } from "@/app/api/api";
 import { useRouter } from "next/navigation"
 import { useState } from "react";
 
@@ -7,28 +8,20 @@ export default function BrewButton({ eventData }: { eventData: number | null }) 
   const [notification, setNotification] = useState<string | null>(null);
 
   async function handleClick() {
-    const url = "http://46.101.127.179:8080/api/events/create";
     console.log(JSON.parse(window.localStorage.getItem('user') || '{}'), ' --> user')
 
     try {
-      const response = await fetch(url, {
-        method: "POST",
-        body: JSON.stringify({
-          creatorId: `${JSON.parse(window.localStorage.getItem('user') || '{}').userId}`,
-          pendingTime: eventData ? eventData : 10,
-        }),
-        headers: {
-          "Authorization": `Bearer ${window.localStorage.getItem('token')}`,
-          "Content-Type": "application/json"
-        }
-      });
+      const userId = `${JSON.parse(window.localStorage.getItem('user') || '{}').userId}`;
+      const pendingTime = eventData ? eventData : 10;
+      const response = await createEvent( {userId, pendingTime })
+      
 
       if (response.status === 409) {
         setNotification("You already have an event in progress.➡️");
         return;
       }
 
-      if (!response.ok) {
+      if (!(response.status === 200)) {
         throw new Error('Failed to create event');
       }
 

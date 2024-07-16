@@ -111,11 +111,6 @@ export default function EventPage() {
             <OrderEvent key={order.coffeeOrderId} order={order} />
           </div>
         ))}
-        {orders.map((order) => (
-          <div className="flex flex-col w-[100%] items-center justify-center bg-stone-300 bg-opacity-5">
-            <OrderEvent key={order.coffeeOrderId} order={order} />
-          </div>
-        ))}
       </div>
       <div>
         <EndEventButton handleCoffeeDoneFunction={handleCoffeeDoneFunction} />

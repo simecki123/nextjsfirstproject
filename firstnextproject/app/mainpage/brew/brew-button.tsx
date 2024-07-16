@@ -34,7 +34,7 @@ export default function BrewButton({ eventData }: { eventData: number | null }) 
   //Error message redirect functionality
   async function handleErrorMessageRedirect() {
     router.push('/mainpage')
-    
+
   }
 
   return (
@@ -43,12 +43,12 @@ export default function BrewButton({ eventData }: { eventData: number | null }) 
         <div className="flex items-center justify-center notification bg-red-500 text-white p-4 rounded mb-4">
           {notification}
           <div>
-          <button className=" px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 grow hover:scale-105 transition"
-                  onClick={handleErrorMessageRedirect}>
-            Go back</button>
+            <button className=" px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 grow hover:scale-105 transition"
+              onClick={handleErrorMessageRedirect}>
+              Go back</button>
           </div>
         </div>
-        
+
       )}
       <button className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-black grow hover:scale-105 transition"
         onClick={handleClick}>BREW</button>

@@ -106,6 +106,7 @@ export default function EventPage() {
           <p className="text-4xl px-4 py-4 bg-stone-700 text-white rounded-xl
             ">Orders</p>
         </div>
+
         {loading ? (
           <p className="text-center mt-4">Loading orders...</p>
         ) : orders.length === 0 ? (
@@ -117,6 +118,7 @@ export default function EventPage() {
             </div>
           ))
         )}
+
       </div>
       <div>
         <EndEventButton handleCoffeeDoneFunction={handleCoffeeDoneFunction} />

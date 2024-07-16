@@ -94,9 +94,6 @@ export default function EventPage() {
   }
 
   return (
-    //   <div className="p-4">
-    //   </div>
-    // </div>
     <div className="flex flex-col h-screen items-center justify-center overflow-hidden">
       <div className="scrollbar scrollbar-thumb-stone-700 scrollbar-track-stone-400
         w-[40%] h-[80vh] bg-stone-300 mb-4 rounded-xl overflow-y-scroll

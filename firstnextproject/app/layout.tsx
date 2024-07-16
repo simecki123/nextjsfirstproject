@@ -7,7 +7,7 @@ const lora = Lora({ style: 'normal', subsets: ["latin"], weight: ["400"] });
 
 export const metadata: Metadata = {
   title: "Coffee app",
-  description: "App for tracking coffee consuption and best coffee makers",
+  description: "App for tracking coffee consumption and best coffee makers",
 };
 
 export default function RootLayout({

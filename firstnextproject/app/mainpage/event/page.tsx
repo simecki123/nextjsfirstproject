@@ -30,6 +30,7 @@ export default function EventPage() {
   const [event, setEvent] = useState<Event | null>(null);
   const [orders, setOrders] = useState<Order[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -39,6 +40,7 @@ export default function EventPage() {
       fetchEventAndOrders(storedUser.userId);
     } else {
       setError("User not found in local storage");
+      setLoading(false);
     }
   }, []);
 
@@ -47,14 +49,16 @@ export default function EventPage() {
   }, [orders]);
 
   const fetchEventAndOrders = async (userId: string) => {
+    setLoading(true);
     try {
       const response = await getUserEventInProgress(userId);
-
-      setOrders(response.data.orders);
+      setOrders(response.data.orders || []);
       setEvent(response.data);
     } catch (err) {
       setError("Failed to fetch event and orders");
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,7 +68,6 @@ export default function EventPage() {
       return;
     }
     try {
-
       await patchEventToDone(user.userId);
       console.log("Event updated successfully");
       router.push('/mainpage');
@@ -103,11 +106,19 @@ export default function EventPage() {
           <p className="text-4xl px-4 py-4 bg-stone-700 text-white rounded-xl
             ">Orders</p>
         </div>
-        {orders.map((order) => (
-          <div className="flex flex-col w-[100%] items-center justify-center bg-stone-300 bg-opacity-5">
-            <OrderEvent key={order.coffeeOrderId} order={order} />
-          </div>
-        ))}
+
+        {loading ? (
+          <p className="text-center mt-4">Loading orders...</p>
+        ) : orders.length === 0 ? (
+          <p className="text-center mt-4">No orders found.</p>
+        ) : (
+          orders.map((order) => (
+            <div key={order.coffeeOrderId} className="flex flex-col w-[100%] items-center justify-center bg-stone-300 bg-opacity-5">
+              <OrderEvent order={order} />
+            </div>
+          ))
+        )}
+
       </div>
       <div>
         <EndEventButton handleCoffeeDoneFunction={handleCoffeeDoneFunction} />

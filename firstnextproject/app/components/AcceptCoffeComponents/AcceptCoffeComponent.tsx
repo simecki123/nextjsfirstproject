@@ -2,7 +2,7 @@
 import React from 'react';
 import coffeIcon from '@/public/coffeImage.png';
 import { useRouter } from 'next/navigation';
-import { Event } from '@/app/mainpage/notification/page';
+import { Event } from './NotificationComponent';
 
 export default function AcceptCoffeComponent({ event }: { event: Event }) {
 

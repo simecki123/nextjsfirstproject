@@ -24,7 +24,7 @@ export default function RateCoffee({ coffeeOrderId }:any) {
     if (givenStars) {
       console.log("Zvijezde su dane", givenStars, "ID ", coffeeOrderId);
       try {
-        const ratingUpdate = givenStars
+        const ratingUpdate = givenStars 
         const res = await giveOrderRating({ coffeeOrderId: coffeeOrderId.toString(), ratingUpdate});
         console.log("Update order response: ", res);
         router.push('/mainpage/myorders');

@@ -24,9 +24,10 @@ export default function OrdersPage() {
             const savedUser = JSON.parse(localStorage.getItem('user') || '{}');
             console.log('savedUser: ', savedUser);
 
-            if (savedUser.userId) {
+            if (savedUser.userId) { 
                 try {
-                    const response: AxiosResponse<OrderList[]> = await getUserOrders(savedUser.userId);
+                    const response = await getUserOrders(savedUser.userId);
+                    console.log("Response: ",response)
                     if (response && Array.isArray(response.data)) {
                         console.log('Response data is an array: ', response.data);
                         setOrderList(response.data); // Update the state with fetched orders

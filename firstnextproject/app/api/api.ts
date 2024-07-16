@@ -51,23 +51,24 @@ api.interceptors.response.use(
 );
 
 
-// Users requests
+// Authentification controller
 export const login = (loginData: any) => api.post('/api/auth/login', loginData);
 export const register = (registerData: any) => api.post('api/auth/register', registerData);
+
+// User controller
 export const fetchAllUsers = () => api.get('api/users');
-
-// Orders
 export const getUserOrders = (userId: any) => api.get(`/api/users/orders/${userId}`);
-export const giveOrderRating = (orderDataUpdate: any) => api.patch(`/api/orders/edit`, orderDataUpdate );
+export const getUserEventInProgress = (userId: any) => api.get(`/api/users/history/${userId}`);
 
-// Events
+
+// Coffee order controller
+export const giveOrderRating = (coffeeData: any) => api.patch(`/api/orders/edit`, coffeeData );
+
+// Brew event controller
+export const createEvent = (eventData: any) => api.post(`/api/events/create`, eventData);
+export const getPendingEvents = (userId: any) => api.get(`/api/events/pending/${userId}`);
 export const getEventsInProgress = () => api.get(`api/events?status=IN_PROGRESS`);
-
-// get one event
-export const getUserEventInProgress = (userId: any) => api.get(`/api/users/${userId}/brew-events/orders`);
-
-// Patch event to be done
-export const patchEventToDone = (creatorId: any) => api.patch('api/events/complete-event', {creatorId});
+export const patchEventToDone = (userId: any) => api.patch(`api/events/complete-event?userId=${userId}`);
   
 
 export default api;

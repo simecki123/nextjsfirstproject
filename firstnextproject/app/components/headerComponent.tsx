@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { getCookie, deleteCookie } from '@/utils/cookieUtils';
 
 export default function ToolbarComponent() {
   const router = useRouter();
@@ -12,12 +13,15 @@ export default function ToolbarComponent() {
   const settingsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
-    console.log('Stored User: ', storedUser);
-    setUser({
-      firstName: storedUser.firstName || '',
-      lastName: storedUser.lastName || ''
-    });
+    const userCookie = getCookie('user');
+    if (userCookie) {
+      const storedUser = JSON.parse(userCookie);
+      console.log('Stored User: ', storedUser);
+      setUser({
+        firstName: storedUser.firstName || '',
+        lastName: storedUser.lastName || ''
+      });
+    }
   }, []);
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -37,8 +41,8 @@ export default function ToolbarComponent() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    deleteCookie('user');
+    deleteCookie('token');
     router.push('/login');
   };
 

@@ -1,5 +1,6 @@
 'use client'
 import { createEvent } from "@/app/api/api";
+import { getCookie } from "@/utils/cookieUtils";
 import { useRouter } from "next/navigation"
 import { useState } from "react";
 
@@ -8,10 +9,11 @@ export default function BrewButton({ eventData }: { eventData: number | null }) 
   const [notification, setNotification] = useState<string | null>(null);
 
   async function handleClick() {
-    console.log(JSON.parse(window.localStorage.getItem('user') || '{}'), ' --> user')
+    const userCookie = getCookie('user');
+    console.log(JSON.parse(userCookie || '{}'), ' --> user')
 
     try {
-      const userId = `${JSON.parse(window.localStorage.getItem('user') || '{}').userId}`;
+      const userId = `${JSON.parse(userCookie || '{}').userId}`;
       const pendingTime = eventData ? eventData : 10;
       const response = await createEvent( {userId, pendingTime })
       

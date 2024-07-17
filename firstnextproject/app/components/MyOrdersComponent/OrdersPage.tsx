@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import MyOrderComponent from './MyOrderComponents/MyOrderComponent';
 import { getUserOrders } from '@/app/api/api';
 import axios, { AxiosResponse } from 'axios';
+import { getCookie } from '@/utils/cookieUtils';
 
 // Define the OrderList interface outside the component
 interface OrderList {
@@ -21,7 +22,8 @@ export default function OrdersPage() {
     // Fetch orders when the component mounts
     useEffect(() => {
         async function fetchOrders() {
-            const savedUser = JSON.parse(localStorage.getItem('user') || '{}');
+            const userCookie = getCookie('user');
+            const savedUser = JSON.parse(userCookie || '{}');
             console.log('savedUser: ', savedUser);
 
             if (savedUser.userId) { 

@@ -1,6 +1,6 @@
 // lib/api.ts
 import axios from 'axios';
-
+import { getCookie, deleteCookie } from '@/utils/cookieUtils';
 
 const api = axios.create({
   baseURL: 'http://46.101.127.179:8080', // Replace with your Spring Boot API base URL
@@ -17,10 +17,9 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     console.log('Request interceptor called');
-    const token = localStorage.getItem('token');
+    const token = getCookie('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-      
     }
     return config;
   },
@@ -37,15 +36,11 @@ api.interceptors.response.use(
   },
   (error) => {
     console.log('Response interceptor error:', error);
-    if (error.response?.status === 401) {
-      // Unauthorized, redirect to login
-      console.log('Unauthorized, redirecting to login');
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      
-    } else if (error.response?.status === 403) {
-      console.log('Forbidden, redirecting to login');
-      
+    if (error.response?.status === 401 || error.response?.status === 403) {
+      console.log('Unauthorized or Forbidden, redirecting to login');
+      deleteCookie('token');
+      deleteCookie('user');
+      // Redirect to login page (you may need to implement this part)
     }
     return Promise.reject(error);
   }
@@ -62,9 +57,11 @@ export const getUserOrders = (userId: any) => api.get(`/api/users/${userId}/orde
 export const getUserEventInProgress = (userId: any) => api.get(`/api/users/${userId}/events`);
 
 
+
 // Coffee order controller
 export const giveOrderRating = (coffeeData: any) => api.patch(`/api/orders/edit`, coffeeData );
 export const getOrderById = (orderId: any) => api.get(`api/orders/${orderId}`);
+export const createOrder = (orderData: any) => api.post(`api/orders/create`, orderData);
 
 // Brew event controller
 export const createEvent = (eventData: any) => api.post(`/api/events/create`, eventData);

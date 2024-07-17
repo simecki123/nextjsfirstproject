@@ -3,6 +3,8 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import AcceptCoffeComponent from '@/app/components/AcceptCoffeComponents/AcceptCoffeComponent';
 import { getPendingEvents } from '@/app/api/api';
+import { getCookie } from '@/utils/cookieUtils';
+
 
 export interface Event {
   eventId: string;
@@ -21,8 +23,10 @@ export default function NotificationComponent() {
     useEffect(() => {
       const fetchEvents = async () => {
         try {
-          const user = JSON.parse(localStorage.getItem('user') || '{}');
-          const token = localStorage.getItem('token');
+          const userCookie = getCookie('user');
+          const user = JSON.parse(userCookie || '{}'); 
+          
+          const token = getCookie('token');
   
           if (!user.userId || !token) {
             throw new Error('User or token not found');

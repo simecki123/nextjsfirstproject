@@ -4,6 +4,8 @@ import EndEventButton from "../../components/EventComponents/end-event-button";
 import OrderEvent from "../../components/EventComponents/order-component";
 import { getOrderById, getUserEventInProgress, patchEventToDone } from "@/app/api/api";
 import { useRouter } from "next/navigation";
+import { getCookie } from '@/utils/cookieUtils';
+
 
 interface User {
   firstName: string;
@@ -34,12 +36,13 @@ export default function EventPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user') || 'null');
+    const userCookie = getCookie('user');
+    const storedUser = JSON.parse(userCookie || 'null');
     if (storedUser) {
       setUser(storedUser);
       fetchEventAndOrders(storedUser.userId);
     } else {
-      setError("User not found in local storage");
+      setError("User not found in cookie storage");
       setLoading(false);
     }
   }, []);

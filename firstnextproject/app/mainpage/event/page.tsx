@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import EndEventButton from "./end-event-button";
-import OrderEvent from "./order-component";
-import { getUserEventInProgress, patchEventToDone } from "@/app/api/api";
+import EndEventButton from "../../components/EventComponents/end-event-button";
+import OrderEvent from "../../components/EventComponents/order-component";
+import { getOrderById, getUserEventInProgress, patchEventToDone } from "@/app/api/api";
 import { useRouter } from "next/navigation";
 
 interface User {
@@ -52,7 +52,16 @@ export default function EventPage() {
     setLoading(true);
     try {
       const response = await getUserEventInProgress(userId);
-      setOrders(response.data.orders || []);
+      console.log("Response: ", response);
+      
+      const newOrders = [];
+      for (let i = 0; i < response.data.orderIds.length; i++) {
+        const databaseOrder = await getOrderById(response.data.orderIds[i]);
+        console.log("Database order: ", databaseOrder);
+        newOrders.push(databaseOrder.data);
+      }
+      console.log("Orders: ", newOrders);
+      setOrders(newOrders);
       setEvent(response.data);
     } catch (err) {
       setError("Failed to fetch event and orders");

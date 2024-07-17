@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react';
-import BrewButton from './brew-button';
-import TimeButton from './time-button';
+import BrewButton from '../../components/BrewComponents/brew-button';
+import TimeButton from '../../components/BrewComponents/time-button';
 
 export default function Brew() {
   const [selectedButton, setSelectedButton] = useState<number | null>(5);

@@ -1,4 +1,6 @@
 'use client'
+import { createOrder } from "@/app/api/api";
+import { getCookie } from "@/utils/cookieUtils";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -15,23 +17,19 @@ export default function CoffeeTypeComponent() {
   const router = useRouter();
 
   function handleClick(): void {
+    const userCookie = getCookie('user');
 
-    const url = 'http://46.101.127.179:8080/api/orders/create';
+    createOrder({
+      eventId: `${eventId}`,
+      userId: `${JSON.parse(userCookie || '{}').userId}`,
+      type: `TURKISH`,
+      sugarQuantity: selectedAmountOfSugar,
+      milkQuantity: selectedAmountOfMilk,
+    });
 
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify({
-        eventId: `${eventId}`,
-        userId: `${JSON.parse(window.localStorage.getItem('user') || '{}').userId}`,
-        type: `TURKISH`,
-        sugarQuantity: selectedAmountOfSugar,
-        milkQuantity: selectedAmountOfMilk,
-      }),
-      headers: {
-        "Authorization": `Bearer ${window.localStorage.getItem('token')}`,
-        "Content-Type": "application/json"
-      }
-    })
+    
+
+    
 
     router.push('/mainpage')
   }

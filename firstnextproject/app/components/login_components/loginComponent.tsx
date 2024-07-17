@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { login } from '@/app/api/api';
+import { setCookie } from '@/utils/cookieUtils';
 
 export default function LoginComponent() {
   const router = useRouter();
@@ -25,21 +26,17 @@ export default function LoginComponent() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Check if email or password is empty
     if (!email || !password) {
       setError('Please enter both email and password');
       return;
     }
-
     try {
       const response = await login({ email, password });
       const token = response.data.accessToken;
-
       if (token) {
-        localStorage.setItem('token', token);
+        setCookie('token', token); // Set the token as a cookie
         const decodedToken = jwtDecode(token);
-        localStorage.setItem('user', JSON.stringify(decodedToken));
+        setCookie('user', JSON.stringify(decodedToken)); // Set user info as a cookie
         router.push('/mainpage');
       } else {
         setError('Login failed: No token received');

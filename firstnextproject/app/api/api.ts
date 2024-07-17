@@ -1,6 +1,7 @@
 // lib/api.ts
 import axios from 'axios';
 
+
 const api = axios.create({
   baseURL: 'http://46.101.127.179:8080', // Replace with your Spring Boot API base URL
   headers: {
@@ -19,11 +20,11 @@ api.interceptors.request.use(
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+      
     }
     return config;
   },
   (error) => {
-    console.log('Request interceptor error:', error);
     return Promise.reject(error);
   }
 );
@@ -57,12 +58,13 @@ export const register = (registerData: any) => api.post('api/auth/register', reg
 
 // User controller
 export const fetchAllUsers = () => api.get('api/users');
-export const getUserOrders = (userId: any) => api.get(`/api/users/orders/${userId}`);
-export const getUserEventInProgress = (userId: any) => api.get(`/api/users/history/${userId}`);
+export const getUserOrders = (userId: any) => api.get(`/api/users/${userId}/orders`);
+export const getUserEventInProgress = (userId: any) => api.get(`/api/users/${userId}/events`);
 
 
 // Coffee order controller
 export const giveOrderRating = (coffeeData: any) => api.patch(`/api/orders/edit`, coffeeData );
+export const getOrderById = (orderId: any) => api.get(`api/orders/${orderId}`);
 
 // Brew event controller
 export const createEvent = (eventData: any) => api.post(`/api/events/create`, eventData);

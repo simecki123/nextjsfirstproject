@@ -1,6 +1,6 @@
-'use client'
+
+import { cookies } from 'next/headers'
 import { getEventsInProgress } from '@/app/api/api';
-import React, { useEffect, useState } from 'react';
 import CurentlyBrewingComponent from '../CurentlyBrewingComponent/CurentlyBrewingComponent';
 
 interface Event {
@@ -11,27 +11,23 @@ interface Event {
   status: string
 }
 
-export default function CurrentlyBrewingUsers() {
+export default async function CurrentlyBrewingUsers() {
+  let currentlyBrewingUsers: Event[] = [];
 
-  const [currentlyBrewingUsers, setCurentlyBrewingUsers] = useState<Event[]>([]);
-
-  useEffect(() => {
-    fetchEvents();
-  }, []);
-
-  const fetchEvents = async () => {
-    try {
-      const response = await getEventsInProgress();
-      console.log("Events in progress: ", response.data);
-      setCurentlyBrewingUsers(response.data);
-    } catch (error) {
-      console.error("Error fetching events:", error);
-    }
-  };
+  try {
+    const cookieStore = cookies();
+    const token = cookieStore.get('token');
+    const response = await getEventsInProgress(token?.value);
+    console.log("Events in progress: ", response.data);
+    currentlyBrewingUsers = response.data;
+  } catch (error) {
+    console.error("Error fetching events:", error);
+  }
 
   const currentlyBrewingComps = currentlyBrewingUsers.map((user) => (
     <CurentlyBrewingComponent key={user.eventId} firstName={user.firstName} />
   ));
+
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3
         lg:grid-cols-4 gap-4 bg-gray-100 bg-opacity-80 p-4 rounded-lg shadow-md

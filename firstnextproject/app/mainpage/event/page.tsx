@@ -1,11 +1,8 @@
-"use client";
-import { useEffect, useState } from "react";
+
 import EndEventButton from "../../components/EventComponents/end-event-button";
 import OrderEvent from "../../components/EventComponents/order-component";
-import { getOrderById, getUserEventInProgress, patchEventToDone } from "@/app/api/api";
-import { useRouter } from "next/navigation";
-import { getCookie } from '@/utils/cookieUtils';
-
+import { getUserEventInProgress, getOrderById } from "@/app/api/api";
+import { cookies } from 'next/headers';
 
 interface User {
   firstName: string;
@@ -27,82 +24,45 @@ interface Order {
   // Add other properties as needed
 }
 
-export default function EventPage() {
-  const [user, setUser] = useState<User | null>(null);
-  const [event, setEvent] = useState<Event | null>(null);
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
+async function getUser() {
+  const cookieStore = cookies();
+  const userCookie = cookieStore.get('user');
+  return userCookie ? JSON.parse(userCookie.value) : null;
+}
 
-  useEffect(() => {
-    const userCookie = getCookie('user');
-    const storedUser = JSON.parse(userCookie || 'null');
-    if (storedUser) {
-      setUser(storedUser);
-      fetchEventAndOrders(storedUser.userId);
-    } else {
-      setError("User not found in cookie storage");
-      setLoading(false);
-    }
-  }, []);
+async function fetchEventAndOrders(userId: string) {
+  const cookieStore = cookies();
+  const token = cookieStore.get('token');
+  const response = await getUserEventInProgress(token?.value, userId);
+  const newOrders = [];
+  for (let i = 0; i < response.data.orderIds.length; i++) {
+    const databaseOrder = await getOrderById(token?.value, response.data.orderIds[i]);
+    newOrders.push(databaseOrder.data);
+  }
+  return { event: response.data, orders: newOrders };
+}
 
-  useEffect(() => {
-    console.log('Updated orders: ', orders);
-  }, [orders]);
-
-  const fetchEventAndOrders = async (userId: string) => {
-    setLoading(true);
-    try {
-      const response = await getUserEventInProgress(userId);
-      console.log("Response: ", response);
-      
-      const newOrders = [];
-      for (let i = 0; i < response.data.orderIds.length; i++) {
-        const databaseOrder = await getOrderById(response.data.orderIds[i]);
-        console.log("Database order: ", databaseOrder);
-        newOrders.push(databaseOrder.data);
-      }
-      console.log("Orders: ", newOrders);
-      setOrders(newOrders);
-      setEvent(response.data);
-    } catch (err) {
-      setError("Failed to fetch event and orders");
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleCoffeeDoneFunction = async () => {
-    if (!user || !event) {
-      setError("User or event data is missing");
-      return;
-    }
-    try {
-      await patchEventToDone(user.userId);
-      console.log("Event updated successfully");
-      router.push('/mainpage');
-    } catch (err) {
-      setError("Failed to update event");
-      console.error(err);
-    }
-  };
-
-  if (error) {
-    if (error === "Failed to fetch event and orders") {
-      return (
-        <div className="flex items-center justify-center h-screen ">
-          <p className="text-lg text-red-600 font-semibold bg-red-100 p-4 rounded-md border border-red-300 shadow-md">
-            You don't have an event that is in progress
-          </p>
-        </div>
-      );
-    }
+export default async function EventPage() {
+  const user = await getUser();
+  
+  if (!user) {
     return (
       <div className="flex items-center justify-center h-screen ">
         <p className="text-lg text-red-600 font-semibold bg-red-100 p-4 rounded-md border border-red-300 shadow-md">
-          Error: {error}
+          User not found in cookie storage
+        </p>
+      </div>
+    );
+  }
+
+  let event, orders;
+  try {
+    ({ event, orders } = await fetchEventAndOrders(user.userId));
+  } catch (error) {
+    return (
+      <div className="flex items-center justify-center h-screen ">
+        <p className="text-lg text-red-600 font-semibold bg-red-100 p-4 rounded-md border border-red-300 shadow-md">
+          You don't have an event that is in progress
         </p>
       </div>
     );
@@ -119,9 +79,7 @@ export default function EventPage() {
             ">Orders</p>
         </div>
 
-        {loading ? (
-          <p className="text-center mt-4">Loading orders...</p>
-        ) : orders.length === 0 ? (
+        {orders.length === 0 ? (
           <p className="text-center mt-4">No orders found.</p>
         ) : (
           orders.map((order) => (
@@ -133,7 +91,7 @@ export default function EventPage() {
 
       </div>
       <div>
-        <EndEventButton handleCoffeeDoneFunction={handleCoffeeDoneFunction} />
+        <EndEventButton userId={user.userId} />
       </div>
     </div>
   );

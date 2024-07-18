@@ -1,10 +1,7 @@
-'use client';
-import React from 'react'
-import { useState, useEffect } from 'react';
-import AcceptCoffeComponent from '@/app/components/AcceptCoffeComponents/AcceptCoffeComponent';
+// NotificationComponent.tsx
+import { cookies } from 'next/headers';
 import { getPendingEvents } from '@/app/api/api';
-import { getCookie } from '@/utils/cookieUtils';
-
+import AcceptCoffeComponent from '@/app/components/AcceptCoffeComponents/AcceptCoffeComponent';
 
 export interface Event {
   eventId: string;
@@ -13,58 +10,42 @@ export interface Event {
   status: string;
 }
 
+export default async function NotificationComponent() {
+  const cookieStore = cookies();
+  const userCookie = cookieStore.get('user');
+  const tokenCookie = cookieStore.get('token');
 
+  if (!userCookie || !tokenCookie) {
+    return (
+      <div className='flex items-center justify-center h-screen'>
+        <p className='text-lg text-red-600 font-semibold bg-red-100 p-4 rounded-md border border-red-300 shadow-md'>
+          User or token not found. Please log in again.
+        </p>
+      </div>
+    );
+  }
 
-export default function NotificationComponent() {
-    const [currentEvents, setCurrentEvents] = useState<Event[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+  const user = JSON.parse(userCookie.value);
   
-    useEffect(() => {
-      const fetchEvents = async () => {
-        try {
-          const userCookie = getCookie('user');
-          const user = JSON.parse(userCookie || '{}'); 
-          
-          const token = getCookie('token');
-  
-          if (!user.userId || !token) {
-            throw new Error('User or token not found');
-          }
-          
-          const response = await getPendingEvents(user.userId);
-  
-          
-          console.log("response: ", response);
-  
-          if (!(response.status === 200)) {
-            throw new Error('Failed to fetch events');
-          }
-  
-          const data = response.data;
-          setCurrentEvents(data);
-        } catch (err) {
-          setError(err instanceof Error ? err.message : 'An error occurred');
-        } finally {
-          setIsLoading(false);
-        }
-      };
-  
-      fetchEvents();
-    }, []);
-  
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
-    if(currentEvents.length === 0) {
-      return(
+  try {
+    const response = await getPendingEvents(tokenCookie?.value, user.userId);
+
+    if (response.status !== 200) {
+      throw new Error('Failed to fetch events');
+    }
+
+    const currentEvents: Event[] = response.data;
+
+    if (currentEvents.length === 0) {
+      return (
         <div className='flex items-center justify-center h-screen'>
           <p className='text-lg text-red-600 font-semibold bg-red-100 p-4 rounded-md border border-red-300 shadow-md'>
-            You dont have any notifications, try to refresh the page
+            You don't have any notifications. Try to refresh the page.
           </p>
         </div>
       );
     }
-  
+
     return (
       <div className="flex items-center justify-center h-screen">
         {currentEvents.map(event => (
@@ -74,5 +55,14 @@ export default function NotificationComponent() {
         ))}
       </div>
     );
-  
+
+  } catch (error) {
+    return (
+      <div className='flex items-center justify-center h-screen'>
+        <p className='text-lg text-red-600 font-semibold bg-red-100 p-4 rounded-md border border-red-300 shadow-md'>
+          Error: {error instanceof Error ? error.message : 'An error occurred'}
+        </p>
+      </div>
+    );
+  }
 }

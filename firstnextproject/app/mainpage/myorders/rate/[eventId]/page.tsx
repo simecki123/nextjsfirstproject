@@ -1,5 +1,7 @@
 import RateCoffee from "@/app/components/rating_components/rate-component";
 
+
+
 export default function RatePage({params}:
   {
     params: {eventId: number}

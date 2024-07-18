@@ -10,6 +10,7 @@ export interface Event {
   status: string;
 }
 
+
 export default async function NotificationComponent() {
   const cookieStore = cookies();
   const userCookie = cookieStore.get('user');
@@ -66,3 +67,5 @@ export default async function NotificationComponent() {
     );
   }
 }
+
+export const revalidate = 1;

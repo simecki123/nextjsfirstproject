@@ -11,6 +11,7 @@ interface User {
   userId: string;
 }
 
+
 interface Event {
   id: string;
   // Add other event properties here
@@ -96,3 +97,5 @@ export default async function EventPage() {
     </div>
   );
 }
+
+export const revalidate = 1;

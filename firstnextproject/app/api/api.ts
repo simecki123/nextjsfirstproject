@@ -61,7 +61,7 @@ export const login = (loginData: any) => api.post('/api/auth/login', loginData);
 export const register = (registerData: any) => api.post('api/auth/register', registerData);
 
 // User controller
-export const fetchAllUsers = (tokenCookie: any) => createApi(tokenCookie).get('api/users');
+export const fetchAllUsers = () => api.get('api/users');
 export const getUserOrders = (serverToken: any, userId: any) => createApi(serverToken).get(`/api/users/${userId}/orders`);
 export const getUserEventInProgress = (serverToken: any, userId: any) => createApi(serverToken).get(`/api/users/${userId}/events`);
 

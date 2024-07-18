@@ -1,6 +1,8 @@
 import ReadyToBrewButton from '../components/mainpage-components/ReadyToBrewButton';
 import CurrentlyBrewingUsers from '../components/mainpage-components/CurrentlyBrewingUsers';
 
+
+
 export default function MainPage() {
 
   return (
@@ -10,3 +12,5 @@ export default function MainPage() {
     </div>
   );
 }
+
+

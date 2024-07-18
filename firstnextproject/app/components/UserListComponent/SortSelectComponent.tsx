@@ -1,6 +1,4 @@
-// app/leaderboard/SortSelectComponent.tsx
 'use client';
-
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -18,7 +16,8 @@ export default function SortSelectComponent({ sortOption }: SortSelectorProps) {
 
     const handleSortOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const newSortOption = event.target.value as SortOption;
-        router.push(`/leaderboard?sort=${newSortOption}`);
+        console.log('Changing sort to:', newSortOption); // Add this line for debugging
+        router.push(`/mainpage/leaderboard?sort=${newSortOption}`);
     };
 
     return (

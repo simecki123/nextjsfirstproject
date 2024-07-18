@@ -12,6 +12,8 @@ interface OrderList {
     rating: number;
 }
 
+
+
 export default async function OrdersPage() {
     const cookieStore = cookies();
     const userCookie = cookieStore.get('user');
@@ -75,3 +77,5 @@ export default async function OrdersPage() {
         );
     }
 }
+
+export const revalidate = 1;

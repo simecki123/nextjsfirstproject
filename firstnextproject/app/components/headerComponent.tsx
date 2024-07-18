@@ -70,7 +70,7 @@ export default function ToolbarComponent() {
               <Link href="/mainpage">
                 <p className="block px-4 py-2 hover:bg-gray-200">Home</p>
               </Link>
-              <Link href="/mainpage/leaderboard">
+              <Link href="/mainpage/leaderboard?sort=coffeeCount">
                 <p className="block px-4 py-2 hover:bg-gray-200">Leaderboard</p>
               </Link>
               <Link href="/mainpage/notification">

@@ -11,6 +11,8 @@ interface Event {
   status: string
 }
 
+
+
 export default async function CurrentlyBrewingUsers() {
   let currentlyBrewingUsers: Event[] = [];
 
@@ -39,3 +41,5 @@ export default async function CurrentlyBrewingUsers() {
     </div>
   )
 }
+
+export const revalidate = 1;

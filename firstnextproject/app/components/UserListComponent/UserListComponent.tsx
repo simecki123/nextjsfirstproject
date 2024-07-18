@@ -1,11 +1,12 @@
-// app/leaderboard/UserListComponent.tsx
-import React from 'react';
+// app/components/UserListComponent/UserListComponent.tsx
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import coffeImage from '@/public/coffeImage.png';
 import trophyImage from '@/public/trophyimage.png';
 import { fetchAllUsers } from '@/app/api/api';
 import { SortOption } from './SortSelectComponent';
-import { cookies } from 'next/headers';
 
 interface User {
     firstName: string;
@@ -14,27 +15,28 @@ interface User {
     coffeeRating: number;
 }
 
-function sortUsersByCoffeeCount(users: User[]): User[] {
-    return [...users].sort((a, b) => b.coffeeCounter - a.coffeeCounter);
-}
-
-function sortUsersByRating(users: User[]): User[] {
-    return [...users].sort((a, b) => b.coffeeRating - a.coffeeRating);
-}
-
 function sortUsers(users: User[], option: SortOption): User[] {
-    return option === SortOption.CoffeeCount
-        ? sortUsersByCoffeeCount(users)
-        : sortUsersByRating(users);
+    if (option === SortOption.CoffeeCount) {
+        return [...users].sort((a, b) => b.coffeeCounter - a.coffeeCounter);
+    } else if (option === SortOption.Rating) {
+        return [...users].sort((a, b) => b.coffeeRating - a.coffeeRating);
+    }
+    return users;
 }
 
-export default async function UserListComponent({ searchParams }: { searchParams: { sort?: string } }) {
-    const sortOption = (searchParams.sort as SortOption) || SortOption.CoffeeCount;
-    const cookieStore = cookies();
-    const tokenCookie = cookieStore.get('token');
+export default function UserListComponent({ sortOption }: { sortOption: SortOption }) {
+    const [users, setUsers] = useState<User[]>([]);
 
-    const res = await fetchAllUsers(tokenCookie?.value);
-    const users = res.data || [];
+    useEffect(() => {
+        async function fetchUsers() {
+            const res = await fetchAllUsers();
+            if (res.data) {
+                setUsers(res.data);
+            }
+        }
+        fetchUsers();
+    }, []);
+
     const sortedUsers = sortUsers(users, sortOption);
     const topUser = sortedUsers.length > 0 ? sortedUsers[0] : null;
 

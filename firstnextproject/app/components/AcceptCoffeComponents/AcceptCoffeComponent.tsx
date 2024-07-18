@@ -1,11 +1,11 @@
 'use client'
 import React from 'react';
+import Image from 'next/image';
 import coffeIcon from '@/public/coffeImage.png';
 import { useRouter } from 'next/navigation';
 import { Event } from './NotificationComponent';
 
 export default function AcceptCoffeComponent({ event }: { event: Event }) {
-
     const router = useRouter();
 
     function pushMainpage() {
@@ -16,7 +16,7 @@ export default function AcceptCoffeComponent({ event }: { event: Event }) {
         <div className='border max-w-sm border-gray-300 shadow-lg rounded-lg p-4 bg-stone-200'>
             <div className='flex justify-between items-center mb-4'>
                 <p className='text-lg font-semibold'>{event.firstName} {event.lastName} is going to make coffee in 5 minutes. Do you want one too?</p>
-                <img src={coffeIcon.src} alt="Coffee icon" className='h-11 w-11' />
+                <Image src={coffeIcon} alt="Coffee icon" width={44} height={44} />
             </div>
             <div className='flex justify-between'>
                 <button className='bg-green-500 text-white py-3 px-5 rounded-lg

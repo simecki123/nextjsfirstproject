@@ -1,15 +1,22 @@
 // NotificationComponent.tsx
 import { cookies } from 'next/headers';
-import { getPendingEvents } from '@/app/api/api';
+import { getPendingEvents, getUserById } from '@/app/api/api';
 import AcceptCoffeComponent from '@/app/components/AcceptCoffeComponents/AcceptCoffeComponent';
 
 export interface Event {
   eventId: string;
-  firstName: string;
-  lastName: string;
-  status: string;
+  userId: string;
+  status: "COMPLETED";
 }
 
+ export interface User {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  coffeeNumber: number;
+  score: number;
+}
 
 export default async function NotificationComponent() {
   const cookieStore = cookies();
@@ -26,10 +33,10 @@ export default async function NotificationComponent() {
     );
   }
 
-  const user = JSON.parse(userCookie.value);
+  const currentUser = JSON.parse(userCookie.value);
   
   try {
-    const response = await getPendingEvents(tokenCookie?.value, user.userId);
+    const response = await getPendingEvents(tokenCookie?.value, currentUser.userId);
 
     if (response.status !== 200) {
       throw new Error('Failed to fetch events');
@@ -47,11 +54,18 @@ export default async function NotificationComponent() {
       );
     }
 
+    // Fetch users for all events
+    const userPromises = currentEvents.map(event => 
+      getUserById(tokenCookie.value, event.userId)
+    );
+    const userResponses = await Promise.all(userPromises);
+    const users: User[] = userResponses.map(response => response.data);
+
     return (
       <div className="flex items-center justify-center h-screen">
-        {currentEvents.map(event => (
+        {currentEvents.map((event, index) => (
           <div key={event.eventId}>
-            <AcceptCoffeComponent event={event} />
+            <AcceptCoffeComponent event={event} eventUser={users[index]} />
           </div>
         ))}
       </div>

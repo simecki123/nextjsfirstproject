@@ -4,7 +4,7 @@ import OrderEvent from "../../components/EventComponents/order-component";
 import { getUserEventInProgress, getOrderById } from "@/app/api/api";
 import { cookies } from 'next/headers';
 
-interface User {
+export interface User {
   firstName: string;
   lastName: string;
   sub: string;
@@ -13,15 +13,22 @@ interface User {
 
 
 interface Event {
-  id: string;
+  eventId: "string",
+  userId: "string",
+  status: "COMPLETED",
+  pendingTime: number,
+  orderIds: [
+    "string"
+  ]
   // Add other event properties here
 }
 
-interface Order {
+export interface Order {
   coffeeOrderId: string;
   type: string;
   sugarQuantity: number;
   milkQuantity: number;
+  userId: string;
   // Add other properties as needed
 }
 

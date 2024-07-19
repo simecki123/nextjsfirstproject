@@ -61,6 +61,7 @@ export const login = (loginData: any) => api.post('/api/auth/login', loginData);
 export const register = (registerData: any) => api.post('api/auth/register', registerData);
 
 // User controller
+export const getUserById = (serverToken: any, userId: any) => createApi(serverToken).get(`api/users/${userId}`); 
 export const fetchAllUsers = () => api.get('api/users');
 export const getUserOrders = (serverToken: any, userId: any) => createApi(serverToken).get(`/api/users/${userId}/orders`);
 export const getUserEventInProgress = (serverToken: any, userId: any) => createApi(serverToken).get(`/api/users/${userId}/events`);
@@ -71,6 +72,7 @@ export const getOrderById = (serverToken: any, orderId: any) => createApi(server
 export const createOrder = (orderData: any) => api.post(`api/orders/create`, orderData);
 
 // Brew event controller
+export const getEventById = (tokenCookie: any, userId: any) => createApi(tokenCookie).get(`/api/events/${userId}`);
 export const createEvent = (eventData: any) => api.post(`/api/events/create`, eventData);
 export const getPendingEvents = (tokenCookie: any, userId: any) => createApi(tokenCookie).get(`/api/events/pending/${userId}`);
 export const getEventsInProgress = (serverToken?: string) => createApi(serverToken).get(`api/events?status=IN_PROGRESS`);

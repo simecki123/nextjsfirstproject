@@ -59,7 +59,7 @@ export default async function MyOrderComponent({ order }: OrderProps) {
             <p className='text-gray-800 font-medium'>Milk: {order.milkQuantity}</p>
             <p className='text-gray-800 font-medium'>Your rating: {order.rating}</p>
 
-            <Link href={`/mainpage/myorders/rate/${order.coffeeOrderId}`}>
+            <Link href={`/myorders/rate/${order.coffeeOrderId}`}>
                 <button className='mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600'>
                     Rate
                 </button>

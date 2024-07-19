@@ -1,6 +1,6 @@
 
-import EndEventButton from "../../components/EventComponents/end-event-button";
-import OrderEvent from "../../components/EventComponents/order-component";
+import EndEventButton from "../components/EventComponents/end-event-button";
+import OrderEvent from "../components/EventComponents/order-component";
 import { getUserEventInProgress, getOrderById } from "@/app/api/api";
 import { cookies } from 'next/headers';
 

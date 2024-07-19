@@ -17,7 +17,7 @@ export default function SortSelectComponent({ sortOption }: SortSelectorProps) {
     const handleSortOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const newSortOption = event.target.value as SortOption;
         console.log('Changing sort to:', newSortOption); // Add this line for debugging
-        router.push(`/mainpage/leaderboard?sort=${newSortOption}`);
+        router.push(`leaderboard?sort=${newSortOption}`);
     };
 
     return (

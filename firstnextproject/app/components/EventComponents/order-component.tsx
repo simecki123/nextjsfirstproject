@@ -1,6 +1,6 @@
 import { getUserById } from "@/app/api/api";
 import { cookies } from "next/headers";
-import { Order } from "@/app/mainpage/event/page"
+import { Order } from "@/app/event/page"
 
 interface User {
   firstName: string;

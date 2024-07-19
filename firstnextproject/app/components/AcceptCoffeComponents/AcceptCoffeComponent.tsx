@@ -26,7 +26,7 @@ export default function AcceptCoffeComponent({ event, eventUser }: AcceptCoffeCo
             <div className='flex justify-between'>
                 <button className='bg-green-500 text-white py-3 px-5 rounded-lg
                     hover:bg-green-600 transition duration-300 mx-1
-                    hover:scale-105' onClick={() => router.push(`/mainpage/notification/${event.eventId}`)}>✔️</button>
+                    hover:scale-105' onClick={() => router.push(`/notification/${event.eventId}`)}>✔️</button>
                 <button className='bg-red-500 text-white py-3 px-5 rounded-lg
                     hover:bg-red-600 transition duration-300 mx-1
                     hover:scale-105' onClick={pushMainpage}>❌</button>

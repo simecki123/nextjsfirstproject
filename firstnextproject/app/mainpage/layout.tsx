@@ -20,7 +20,7 @@ export default function Layout({
 
   return (
     <div className="relative">
-      <header className="relative z-50">
+      <header className="relative z-50 ">
         <ToolbarComponent />
       </header>
       <main className={`relative min-h-screen bg-cover bg-center`} style={{ backgroundImage: `url(${backgroundImage.src})` }}>

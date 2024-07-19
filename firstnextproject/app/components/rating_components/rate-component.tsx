@@ -27,7 +27,7 @@ export default function RateCoffee({ coffeeOrderId }:any) {
         const ratingUpdate = givenStars 
         const res = await giveOrderRating({ coffeeOrderId: coffeeOrderId.toString(), ratingUpdate});
         console.log("Update order response: ", res);
-        router.push('/mainpage/myorders');
+        router.push('/myorders');
       } catch (error) {
         console.error("Error updating order: ", error);
         setError('An error occurred while submitting your rating');

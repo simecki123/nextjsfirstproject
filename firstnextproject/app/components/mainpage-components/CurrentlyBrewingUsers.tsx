@@ -4,10 +4,8 @@ import { getEventsInProgress } from '@/app/api/api';
 import CurentlyBrewingComponent from '../CurentlyBrewingComponent/CurentlyBrewingComponent';
 
 interface Event {
-  creatorId: string,
+  userId: string,
   eventId: string,
-  firstName: string,
-  lastName: string,
   status: string
 }
 
@@ -27,7 +25,7 @@ export default async function CurrentlyBrewingUsers() {
   }
 
   const currentlyBrewingComps = currentlyBrewingUsers.map((user) => (
-    <CurentlyBrewingComponent key={user.eventId} firstName={user.firstName} />
+    <CurentlyBrewingComponent key={user.eventId} userId={user.userId} />
   ));
 
   return (

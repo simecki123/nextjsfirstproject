@@ -4,12 +4,13 @@ import { getUserOrders } from '@/app/api/api';
 import MyOrderComponent from './MyOrderComponents/MyOrderComponent';
 
 interface OrderList {
-    coffeeOrderId: number;
-    creatorId: number;
-    type: string;
-    sugarQuantity: number;
-    milkQuantity: number;
-    rating: number;
+    "coffeeOrderId": "string",
+        "eventId": "string",
+        "userId": "string",
+        "type": "TURKISH",
+        "sugarQuantity": number,
+        "milkQuantity": number,
+        "rating": number
 }
 
 
@@ -54,13 +55,13 @@ export default async function OrdersPage() {
                     </p>
                 </div>
             );
-        }
+        } 
 
         return (
             <div className='flex justify-center items-center min-h-screen bg-transparent'>
                 <div className='w-full max-w-2xl bg-gray-500 bg-opacity-50 p-4 rounded-lg max-h-96 overflow-y-auto'>
                     {orderList.map((order, index) => (
-                        <MyOrderComponent key={index} order={order} />
+                        <MyOrderComponent key={index} order={order}  />
                     ))}
                 </div>
             </div>

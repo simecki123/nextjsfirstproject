@@ -16,7 +16,7 @@ export default function Layout({
 
   return (
     <div>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+      <header className="fixed top-0 left-0 right-0 z-50">
         <Header />
       </header>
       <main className={`relative min-h-screen bg-cover bg-center`} style={{ backgroundImage: `url(${backgroundImage.src})` }}>

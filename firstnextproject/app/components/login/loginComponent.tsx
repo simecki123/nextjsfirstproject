@@ -2,6 +2,7 @@ import LoginSubmitButton from './LoginSubmitButton';
 import Link from 'next/link';
 
 export default function LoginPage() {
+
   return (
     <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen">
       <form className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm">

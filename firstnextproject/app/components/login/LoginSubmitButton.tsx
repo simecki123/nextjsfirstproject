@@ -3,16 +3,19 @@ import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { login } from '@/app/api/api';
-import { setCookie } from '@/utils/cookieUtils';
+import { deleteCookie, setCookie } from '@/utils/cookieUtils';
 
 export default function LoginSubmitButton() {
   const router = useRouter();
   const [error, setError] = useState('');
 
+  deleteCookie('user');
+  deleteCookie('token');
+
   useEffect(() => {
     const emailInput = document.querySelector<HTMLInputElement>('input[name="email"]');
     const passwordInput = document.querySelector<HTMLInputElement>('input[name="password"]');
-   
+
     if (emailInput) emailInput.value = '';
     if (passwordInput) passwordInput.value = '';
   }, []);
@@ -57,8 +60,8 @@ export default function LoginSubmitButton() {
         <p className="text-red-500 text-sm mb-4">{error}</p>
       )}
       <div className="flex items-center justify-center">
-        <button 
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="button"
           onClick={handleSubmit}
         >

@@ -22,11 +22,11 @@ export default function EndEventButton({ userId }: EndEventButtonProps) {
       console.error(err);
     }
   };
- 
+
   return (
     <>
       <div
-        className="bg-black text-white cursor-pointer hover:scale-105 transition rounded-xl py-6 px-6 mb-12"
+        className="bg-black text-white cursor-pointer hover:scale-105 transition rounded-xl py-6 px-6"
         onClick={handleCoffeeDoneFunction}
       >
         <p className="text-2xl">Coffee Done</p>

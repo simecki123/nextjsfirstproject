@@ -54,10 +54,11 @@ export default async function MyOrderComponent({ order }: OrderProps) {
 
     return (
         <div className='bg-white shadow-md rounded-lg p-4 mb-4'>
-            <p className='text-gray-800 font-medium'>Order for you from {user.firstName}</p>
+            <p className='text-gray-800 font-medium'>Order from: {user.firstName}</p>
             <p className='text-gray-800 font-medium'>Sugar: {order.sugarQuantity}</p>
             <p className='text-gray-800 font-medium'>Milk: {order.milkQuantity}</p>
-            <p className='text-gray-800 font-medium'>Your rating: {order.rating}</p>
+            {order.rating === 0 ? <p className='text-gray-800 font-medium'>You haven't rated this order yet</p>
+                : <p className='text-gray-800 font-medium'>You rated this order: {order.rating}</p>}
 
             <Link href={`/my-orders/rate/${order.coffeeOrderId}`}>
                 <button className='mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600'>
@@ -68,4 +69,3 @@ export default async function MyOrderComponent({ order }: OrderProps) {
     );
 }
 
-export const revalidate = 0;

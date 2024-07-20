@@ -49,7 +49,7 @@ export default async function OrdersPage() {
         if (!Array.isArray(orderList) || orderList.length === 0) {
             return (
                 <div className='flex items-center justify-center h-screen'>
-                    <p className='text-lg text-red-600 font-semibold bg-red-100 p-4 rounded-md border border-red-300 shadow-md'>
+                    <p className='text-lg text-gray-600 font-semibold bg-gray-100 p-4 rounded-md border border-gray-300 shadow-md'>
                         You don't have any saved orders. Try to refresh the page.
                     </p>
                 </div>

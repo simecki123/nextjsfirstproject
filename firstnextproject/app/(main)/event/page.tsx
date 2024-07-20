@@ -10,17 +10,6 @@ export interface User {
   userId: string;
 }
 
-
-interface Event {
-  eventId: "string",
-  userId: "string",
-  status: "COMPLETED",
-  pendingTime: number,
-  orderIds: [
-    "string"
-  ]
-}
-
 export interface Order {
   coffeeOrderId: string;
   type: string;
@@ -56,7 +45,7 @@ export default async function EventPage() {
   } catch (error) {
     return (
       <div className="flex items-center justify-center h-screen ">
-        <p className="text-lg text-red-600 font-semibold bg-red-100 p-4 rounded-md border border-red-300 shadow-md">
+        <p className="text-lg text-gray-600 font-semibold bg-gray-100 p-4 rounded-md border border-gray-300 shadow-md">
           You don't have an event that is in progress
         </p>
       </div>
@@ -67,14 +56,8 @@ export default async function EventPage() {
     <div className="flex flex-col h-screen items-center justify-center overflow-hidden">
 
       <div className="scrollbar scrollbar-thumb-stone-700 scrollbar-track-stone-400
-        w-[40%] h-[80vh] bg-stone-300 mb-4 rounded-xl overflow-y-scroll
-        pt-20 bg-opacity-20">
-
-        <div className="absolute top-6 left-0 right-0 flex items-center
-          justify-center mt-4">
-          <p className="text-4xl px-4 py-4 bg-stone-700 text-white rounded-xl
-            ">Orders</p>
-        </div>
+        w-[40%] h-[65vh] bg-stone-300 mb-8 mt-12 rounded-xl overflow-y-scroll
+        bg-opacity-20">
 
         {orders.length === 0 ? (
           <p className="text-center mt-4 text-white">No orders</p>

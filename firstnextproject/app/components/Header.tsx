@@ -9,7 +9,7 @@ export default function Header() {
         <Link href="/mainpage" className="text-2xl font-semibold">Brewify</Link>
         <Link href="/leaderboard?sort=coffeeCount" className="ml-8">Leaderboard</Link>
       </div>
-      <div>
+      <div className="flex items-center">
         <Link href="/notification" className="mr-8">Notifications</Link>
         <Link href="/event" className="mr-8">My event</Link>
         <Link href="/my-orders" className="mr-8">My orders</Link>
